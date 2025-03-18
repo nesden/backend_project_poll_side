@@ -40,7 +40,7 @@ public class REQuestionController {
         }
     }
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable int id) {
+    public ResponseEntity<String> deleteQuestion(@PathVariable int id) {
         try {
             String result = questionService.deleteById(id);
             if (result.contains("successfully")) {
@@ -54,7 +54,7 @@ public class REQuestionController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Question> getUser(@PathVariable int id) {
+    public ResponseEntity<Question> getQuestion(@PathVariable int id) {
 
         try {
             Question question = questionService.getById(id);

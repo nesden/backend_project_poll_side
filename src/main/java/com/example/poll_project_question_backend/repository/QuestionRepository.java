@@ -16,7 +16,8 @@ public class QuestionRepository {
         try {
             String sql = "INSERT INTO question (question_title,answer_1, answer_2, answer_3,answer_4) VALUES(?,?,?,?,?)";
             jdbcTemplate.update(sql, question.getQuestionTitle(), question.getAnswer1(), question.getAnswer2(), question.getAnswer3(), question.getAnswer4());
-            return question;
+            System.out.println(question.getQuestionTitle()+ question.getAnswer1()+question.getAnswer2()+question.getAnswer3()+ question.getAnswer4());
+            return getByQuestionTitleHelper(question.getQuestionTitle());
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
@@ -25,7 +26,7 @@ public class QuestionRepository {
 
     public Question update(Question question) {
         try {
-            String sql = "UPDATE question SET question_title=? answer_1=?, answer_2=?, answer_3=?,answer_4=? WHERE id= ?";
+            String sql = "UPDATE question SET question_title=? ,answer_1=?, answer_2=?, answer_3=?,answer_4=? WHERE id= ?";
             jdbcTemplate.update(sql, question.getQuestionTitle(), question.getAnswer1(), question.getAnswer2(), question.getAnswer3(), question.getAnswer4(), question.getId());
             return getById(question.getId());
         } catch (Exception e) {
@@ -47,11 +48,21 @@ public class QuestionRepository {
     public Question getById(int id) {
         try {
             String sql = "SELECT * FROM question WHERE id=?";
+
             return jdbcTemplate.queryForObject(sql, new QuestionMapper(), id);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
 
+    }
+    public Question getByQuestionTitleHelper(String title){
+        try {
+            String sql="SELECT * FROM question WHERE question_title = ?";
+            return jdbcTemplate.queryForObject(sql,new QuestionMapper(),title);
+        }catch (Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }

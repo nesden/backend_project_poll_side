@@ -1,6 +1,6 @@
 CREATE TABLE question(
 id INT AUTO_INCREMENT,
-question_title VARCHAR(250) NOT NULL,
+question_title VARCHAR(250) UNIQUE NOT NULL,
 answer_1 VARCHAR(250) NOT NULL,
 answer_2 VARCHAR(250) NOT NULL,
 answer_3 VARCHAR(250) NOT NULL,
@@ -8,13 +8,13 @@ answer_4 VARCHAR(250) NOT NULL,
 PRIMARY KEY (id)
 );
 
-CREATE TABLE user_to_question(
-user_id INT NOT NULL,
-question id INT NOT NULL,
-answer_id INT NOT NULL,
-FOREIGN KEY (question_id) REFERENCES id(question),
-FOREIGN KEY (user_id) REFERENCES id(user)
-);
+--CREATE TABLE user_to_question(
+--user_id INT NOT NULL,
+--question id INT NOT NULL,
+--answer_id INT NOT NULL,
+--FOREIGN KEY (question_id) REFERENCES id(question),
+--FOREIGN KEY (user_id) REFERENCES id(user)
+--);
 
 --CREATE TABLE users(
 --id INT AUTO_INCREMENT,

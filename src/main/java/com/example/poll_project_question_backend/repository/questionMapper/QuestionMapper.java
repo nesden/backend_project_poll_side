@@ -5,7 +5,7 @@ import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.time.LocalDate;
+
 
 public class QuestionMapper implements RowMapper<Question> {
 
@@ -15,9 +15,9 @@ public class QuestionMapper implements RowMapper<Question> {
         question.setId(rs.getInt("id"));
         question.setQuestionTitle(rs.getString("question_title"));
         question.setAnswer1(rs.getString("answer_1"));
-        question.setAnswer1(rs.getString("answer_2"));
-        question.setAnswer1(rs.getString("answer_3"));
-        question.setAnswer1(rs.getString("answer_4"));
+        question.setAnswer2(rs.getString("answer_2"));
+        question.setAnswer3(rs.getString("answer_3"));
+        question.setAnswer4(rs.getString("answer_4"));
         return question;
     }
 }
