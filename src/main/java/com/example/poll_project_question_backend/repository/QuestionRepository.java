@@ -1,6 +1,7 @@
 package com.example.poll_project_question_backend.repository;
 
 
+
 import com.example.poll_project_question_backend.model.Question;
 import com.example.poll_project_question_backend.repository.questionMapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,8 @@ public class QuestionRepository {
         }
 
     }
+
+
     public Question getByQuestionTitleHelper(String title){
         try {
             String sql="SELECT * FROM question WHERE question_title = ?";
@@ -64,5 +67,8 @@ public class QuestionRepository {
             System.out.println(e.getMessage());
             return null;
         }
+
+
     }
+
 }

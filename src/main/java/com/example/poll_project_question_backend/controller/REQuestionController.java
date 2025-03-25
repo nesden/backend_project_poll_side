@@ -1,6 +1,7 @@
 package com.example.poll_project_question_backend.controller;
 
 
+
 import com.example.poll_project_question_backend.model.Question;
 import com.example.poll_project_question_backend.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("re-question")
+@RequestMapping("/re-question")
 public class REQuestionController {
 
     @Autowired
@@ -67,4 +68,5 @@ public class REQuestionController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 }

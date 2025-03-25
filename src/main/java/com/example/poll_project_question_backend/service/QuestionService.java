@@ -1,5 +1,6 @@
 package com.example.poll_project_question_backend.service;
 
+
 import com.example.poll_project_question_backend.model.Question;
 import com.example.poll_project_question_backend.repository.QuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,4 +30,5 @@ public class QuestionService {
     public Question getById(int id) {
         return questionRepository.getById(id);
     }
+
 }
