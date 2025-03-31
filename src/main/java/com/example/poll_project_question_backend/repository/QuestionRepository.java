@@ -3,7 +3,7 @@ package com.example.poll_project_question_backend.repository;
 
 
 import com.example.poll_project_question_backend.model.Question;
-import com.example.poll_project_question_backend.repository.questionMapper.QuestionMapper;
+import com.example.poll_project_question_backend.repository.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;

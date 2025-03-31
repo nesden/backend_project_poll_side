@@ -1,4 +1,4 @@
-package com.example.poll_project_question_backend.repository.questionMapper;
+package com.example.poll_project_question_backend.repository.mapper;
 
 import com.example.poll_project_question_backend.model.Question;
 import org.springframework.jdbc.core.RowMapper;

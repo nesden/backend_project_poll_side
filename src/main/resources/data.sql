@@ -8,13 +8,17 @@ answer_4 VARCHAR(250) NOT NULL,
 PRIMARY KEY (id)
 );
 
---CREATE TABLE user_to_question(
---user_id INT NOT NULL,
---question id INT NOT NULL,
---answer_id INT NOT NULL,
---FOREIGN KEY (question_id) REFERENCES id(question),
+CREATE TABLE answer(
+id INT AUTO_INCREMENT,
+question_id INT NOT NULL,
+answer_id INT NOT NULL,
+user_id INT NOT NULL,
+PRIMARY KEY (id),
+FOREIGN KEY (question_id) REFERENCES question(id)
 --FOREIGN KEY (user_id) REFERENCES id(user)
---);
+)
+
+
 
 --CREATE TABLE users(
 --id INT AUTO_INCREMENT,
