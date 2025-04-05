@@ -1,14 +1,17 @@
 package com.example.poll_project_question_backend.service;
 
 import com.example.poll_project_question_backend.model.Answer;
+
+import com.example.poll_project_question_backend.model.CountAnswer;
+import com.example.poll_project_question_backend.model.CountUserForAnswer;
 import com.example.poll_project_question_backend.repository.AnswerRepository;
 import com.example.poll_project_question_backend.user.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 
 @Service
 public class AnswerService {
@@ -39,35 +42,39 @@ public class AnswerService {
 
     public Answer getById(int id) {
         return answerRepository.getById(id);
+
     }
 
     public List<Answer> getAllByUserId(int id) {
         if (userClient.getUserById(id) != null) {
-//            if (answerRepository.getAllAnswersByUserId(id).isEmpty()) {
-//                return null;
-//            }
             return answerRepository.getAllAnswersByUserId(id);
         } else
             return null;
     }
 
 
-//    public ResponseEntity<List<Answer>> getAllByUserId(int id) {
-//        if (userClient.getUserById(id) != null) {
-//            if (answerRepository.getAllAnswersByUserId(id).equals("[]")) {
-//                return new ResponseEntity("the user with id " + id + " has no answers", HttpStatus.BAD_REQUEST);
-//            }
-//            return new ResponseEntity(answerRepository.getAllAnswersByUserId(id), HttpStatus.OK);
-//        } else
-//            return null;
+
+//    public List<CountAnswer> getAnswerCount(int id) {
+//        return answerRepository.getAnswerCount(id);
 //    }
-//    public ResponseEntity<List<Answer>> getAllByUserId(int id) {
-//        if (userClient.getUserById(id) != null) {
-//            if (answerRepository.getAllAnswersByUserId(id).equals("[]")) {
-//                return new ResponseEntity("the user with id " + id + " has no answers", HttpStatus.BAD_REQUEST);
-//            }
-//            return new ResponseEntity(answerRepository.getAllAnswersByUserId(id), HttpStatus.OK);
-//        } else
-//            return null;
+    public List<Map<String, Object>> getAnswerCount(Integer id) {
+        return answerRepository.getAnswerCount(id);
+    }
+//    public CountUserForAnswer getAnswerCountPerUserByQuestId(int id) {
+//        return answerRepository.getAnswerCountPerUserByQuestId(id);
 //    }
+    public  Map<String,Object> getAnswerCountPerUserByQuestId(int id) {
+        return answerRepository.getAnswerCountPerUserByQuestId(id);
+    }
+
+
+
+    public String deleteAllAnswersByUserId(int id) {
+        if (userClient.getUserById(id) != null) {
+            return answerRepository.deleteAllAnswersByUserId(id);
+        } else
+            return null;
+    }
 }
+
+

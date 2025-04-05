@@ -13,6 +13,7 @@ id INT AUTO_INCREMENT,
 question_id INT NOT NULL,
 answer_id INT NOT NULL,
 user_id INT NOT NULL,
+UNIQUE (question_id,user_id),
 PRIMARY KEY (id),
 FOREIGN KEY (question_id) REFERENCES question(id)
 --FOREIGN KEY (user_id) REFERENCES id(user)

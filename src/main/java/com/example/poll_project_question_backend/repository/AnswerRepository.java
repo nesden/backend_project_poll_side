@@ -1,14 +1,17 @@
 package com.example.poll_project_question_backend.repository;
 
 import com.example.poll_project_question_backend.model.Answer;
-import com.example.poll_project_question_backend.model.Question;
+import com.example.poll_project_question_backend.model.CountAnswer;
+import com.example.poll_project_question_backend.model.CountUserForAnswer;
+import com.example.poll_project_question_backend.repository.mapper.CountAnswerMapper;
 import com.example.poll_project_question_backend.repository.mapper.AnswerMapper;
-import com.example.poll_project_question_backend.repository.mapper.QuestionMapper;
+import com.example.poll_project_question_backend.repository.mapper.CountUserForAnswerMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Map;
 
 @Repository
 public class AnswerRepository {
@@ -62,7 +65,7 @@ public class AnswerRepository {
     public List<Answer> getAllAnswersByUserId(int id) {
         try {
             String sql = "SELECT * FROM answer WHERE user_id=?";
-            List<Answer> answers=jdbcTemplate.query(sql,new AnswerMapper(),id);
+            List<Answer> answers = jdbcTemplate.query(sql, new AnswerMapper(), id);
             return answers;
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -70,9 +73,58 @@ public class AnswerRepository {
         }
 
     }
-//    public String deleteAllAnswersByUserId(int id){
+
+//    public List<CountAnswer> getAnswerCount(int id) {
+//        try {
+//            String sql = "SELECT answer_id, COUNT(*) FROM answer WHERE question_id = ? GROUP BY answer_id";
+//            return jdbcTemplate.query(sql, new CountAnswerMapper(), id);
+//        } catch (Exception e) {
+//            throw new RuntimeException(e);
+//        }
 //
 //    }
+    public List<Map<String,Object>> getAnswerCount(Integer id) {
+        try {
+            String sql = "SELECT answer_id AS answer_number, COUNT(*) AS amount FROM answer WHERE question_id  = ? GROUP BY answer_id";
+            return jdbcTemplate.queryForList(sql, id);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+
+//    public CountUserForAnswer getAnswerCountPerUserByQuestId(int id) {
+//        try {
+//            String sql = "SELECT COUNT(user_id) FROM answer WHERE question_id =? ";
+//            return jdbcTemplate.queryForObject(sql, new CountUserForAnswerMapper(), id);
+//        } catch (Exception e) {
+//            System.out.println(e.getMessage());
+//            return null;
+//        }
+//    }
+
+    public Map<String,Object> getAnswerCountPerUserByQuestId(int id) {
+        try {
+            String sql = "SELECT COUNT(user_id) as users FROM answer WHERE question_id =? ";
+            return jdbcTemplate.queryForMap(sql, id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+
+    public String deleteAllAnswersByUserId(int id) {
+        try {
+            String sql = "DELETE FROM answer WHERE user_id= ?";
+            jdbcTemplate.update(sql, id);
+            return "the answers made by user " + id + " deleted successfully";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
+
+    }
 }
 
 
