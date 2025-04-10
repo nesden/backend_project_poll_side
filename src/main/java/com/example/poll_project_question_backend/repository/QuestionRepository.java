@@ -1,12 +1,13 @@
 package com.example.poll_project_question_backend.repository;
 
 
-
 import com.example.poll_project_question_backend.model.Question;
 import com.example.poll_project_question_backend.repository.mapper.QuestionMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class QuestionRepository {
@@ -17,7 +18,7 @@ public class QuestionRepository {
         try {
             String sql = "INSERT INTO question (question_title,answer_1, answer_2, answer_3,answer_4) VALUES(?,?,?,?,?)";
             jdbcTemplate.update(sql, question.getQuestionTitle(), question.getAnswer1(), question.getAnswer2(), question.getAnswer3(), question.getAnswer4());
-            System.out.println(question.getQuestionTitle()+ question.getAnswer1()+question.getAnswer2()+question.getAnswer3()+ question.getAnswer4());
+            System.out.println(question.getQuestionTitle() + question.getAnswer1() + question.getAnswer2() + question.getAnswer3() + question.getAnswer4());
             return getByQuestionTitleHelper(question.getQuestionTitle());
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -59,11 +60,13 @@ public class QuestionRepository {
     }
 
 
-    public Question getByQuestionTitleHelper(String title){
+
+
+    public Question getByQuestionTitleHelper(String title) {
         try {
-            String sql="SELECT * FROM question WHERE question_title = ?";
-            return jdbcTemplate.queryForObject(sql,new QuestionMapper(),title);
-        }catch (Exception e){
+            String sql = "SELECT * FROM question WHERE question_title = ?";
+            return jdbcTemplate.queryForObject(sql, new QuestionMapper(), title);
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }

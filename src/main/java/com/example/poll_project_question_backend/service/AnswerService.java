@@ -53,21 +53,23 @@ public class AnswerService {
     }
 
 
-
-//    public List<CountAnswer> getAnswerCount(int id) {
+    //    public List<CountAnswer> getAnswerCount(int id) {
 //        return answerRepository.getAnswerCount(id);
 //    }
     public List<Map<String, Object>> getAnswerCount(Integer id) {
         return answerRepository.getAnswerCount(id);
     }
-//    public CountUserForAnswer getAnswerCountPerUserByQuestId(int id) {
+
+    //    public CountUserForAnswer getAnswerCountPerUserByQuestId(int id) {
 //        return answerRepository.getAnswerCountPerUserByQuestId(id);
 //    }
-    public  Map<String,Object> getAnswerCountPerUserByQuestId(int id) {
+    public Map<String, Object> getAnswerCountPerUserByQuestId(int id) {
         return answerRepository.getAnswerCountPerUserByQuestId(id);
     }
 
-
+    public Map<String, List<Map<String, Object>>>  getAllQuestionsAndAnswerCount() {//List<String>
+        return answerRepository.getAllQuestionsAndAnswerCount();
+    }
 
     public String deleteAllAnswersByUserId(int id) {
         if (userClient.getUserById(id) != null) {

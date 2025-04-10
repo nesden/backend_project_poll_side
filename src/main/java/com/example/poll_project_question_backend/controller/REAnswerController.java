@@ -140,6 +140,15 @@ public class REAnswerController {
         }
     }
 
+    @GetMapping("/get-all-questions-and-answers")
+    public ResponseEntity<Map<String, List<Map<String, Object>>>> getAllQuestionsAndAnswerCount() {//List<String>
+        try {
+            return new ResponseEntity(answerService.getAllQuestionsAndAnswerCount(), HttpStatus.OK);
+
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     //change this url to something else
     @DeleteMapping("/questions-by-user/{userId}")
