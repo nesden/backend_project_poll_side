@@ -20,7 +20,6 @@ public class Answer {
 
     public Answer() {
     }
-
     public int getId() {
         return id;
     }

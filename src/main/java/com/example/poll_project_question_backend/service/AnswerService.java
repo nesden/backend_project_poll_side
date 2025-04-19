@@ -2,8 +2,6 @@ package com.example.poll_project_question_backend.service;
 
 import com.example.poll_project_question_backend.model.Answer;
 
-import com.example.poll_project_question_backend.model.CountAnswer;
-import com.example.poll_project_question_backend.model.CountUserForAnswer;
 import com.example.poll_project_question_backend.repository.AnswerRepository;
 import com.example.poll_project_question_backend.user.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @Service
 public class AnswerService {
@@ -23,13 +20,24 @@ public class AnswerService {
     private UserClient userClient;
 
     public Answer save(Answer answer) {
-        if (userClient.getUserById(answer.getUserId()) != null) {// calls the user by the id
-            return answerRepository.save(answer);
+
+        System.out.println(answer.getAnswerId());
+        if (answer.getAnswerId() > 4 || answer.getAnswerId() < 1) {
+            System.out.println("this");
+            return null;
         }
-        return null;
+        System.out.println(answer.getAnswerId());
+        if (userClient.getUserById(answer.getUserId()) == null) {// calls the user by the id
+            return null;
+        }
+        return answerRepository.save(answer);
+
     }
 
     public Answer update(Answer answer) {
+        if (answer.getAnswerId() > 4 || answer.getAnswerId() < 1) {
+            return null;
+        }
         return answerRepository.update(answer);
     }
 
@@ -52,22 +60,15 @@ public class AnswerService {
             return null;
     }
 
-
-    //    public List<CountAnswer> getAnswerCount(int id) {
-//        return answerRepository.getAnswerCount(id);
-//    }
     public List<Map<String, Object>> getAnswerCount(Integer id) {
         return answerRepository.getAnswerCount(id);
     }
 
-    //    public CountUserForAnswer getAnswerCountPerUserByQuestId(int id) {
-//        return answerRepository.getAnswerCountPerUserByQuestId(id);
-//    }
     public Map<String, Object> getAnswerCountPerUserByQuestId(int id) {
         return answerRepository.getAnswerCountPerUserByQuestId(id);
     }
 
-    public Map<String, List<Map<String, Object>>>  getAllQuestionsAndAnswerCount() {//List<String>
+    public Map<String, List<Map<String, Object>>> getAllQuestionsAndAnswerCount() {
         return answerRepository.getAllQuestionsAndAnswerCount();
     }
 

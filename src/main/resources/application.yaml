@@ -20,6 +20,3 @@ external-api:
   user:
     name: "user-api"
     url: "http://localhost:8080"
-#  lastfm:
-#    name: "lastfm-api"
-#    url: "http://ws.audioscrobbler.com/2.0"

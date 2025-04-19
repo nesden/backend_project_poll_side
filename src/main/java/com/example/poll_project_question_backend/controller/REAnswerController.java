@@ -1,9 +1,5 @@
 package com.example.poll_project_question_backend.controller;
-
-
 import com.example.poll_project_question_backend.model.Answer;
-import com.example.poll_project_question_backend.model.CountAnswer;
-import com.example.poll_project_question_backend.model.CountUserForAnswer;
 import com.example.poll_project_question_backend.service.AnswerService;
 import com.example.poll_project_question_backend.user.UserClient;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 
 @RestController
 @RequestMapping("/re-answer")
@@ -104,15 +99,6 @@ public class REAnswerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    //    @GetMapping("/count-answers/{id}")
-//    public ResponseEntity<CountAnswer> getAnswerCount(@PathVariable int id){
-//        try {
-//            return new ResponseEntity(answerService.getAnswerCount(id),HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
     @GetMapping("/count-answers/{id}")
     public ResponseEntity<List<Map<String, Object>>> getAnswerCount(@PathVariable Integer id) {
         try {
@@ -121,16 +107,6 @@ public class REAnswerController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    //
-//    @GetMapping("/count-answers-per-user/{id}")
-//    public ResponseEntity<CountUserForAnswer> getAnswerCountPerUserByQuestId(@PathVariable int id) {
-//        try {
-//            return new ResponseEntity(answerService.getAnswerCountPerUserByQuestId(id), HttpStatus.OK);
-//        } catch (Exception e) {
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
     @GetMapping("/count-answers-per-user/{id}")
     public ResponseEntity<Map<String, Object>> getAnswerCountPerUserByQuestId(@PathVariable int id) {
         try {
@@ -141,7 +117,7 @@ public class REAnswerController {
     }
 
     @GetMapping("/get-all-questions-and-answers")
-    public ResponseEntity<Map<String, List<Map<String, Object>>>> getAllQuestionsAndAnswerCount() {//List<String>
+    public ResponseEntity<Map<String, List<Map<String, Object>>>> getAllQuestionsAndAnswerCount() {
         try {
             return new ResponseEntity(answerService.getAllQuestionsAndAnswerCount(), HttpStatus.OK);
 
@@ -150,11 +126,11 @@ public class REAnswerController {
         }
     }
 
-    //change this url to something else
-    @DeleteMapping("/questions-by-user/{userId}")
-    public ResponseEntity<String> deleteAnswersByUserId(@PathVariable int userId) {
+
+    @DeleteMapping("/delete-all-answers-by-user/{Id}")//delete-all-questions-by-user
+    public ResponseEntity<String> deleteAnswersByUserId(@PathVariable int Id) {
         try {
-            String result = answerService.deleteAllAnswersByUserId(userId);
+            String result = answerService.deleteAllAnswersByUserId(Id);
             if (result.contains("successfully")) {
                 return new ResponseEntity<>(result, HttpStatus.OK);
             }
